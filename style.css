@@ -1,0 +1,15 @@
+.body {
+    /* Add a linear gradient to the body */
+    background: linear-gradient(to right, rgb(128, 0, 128), rgb(172, 86, 233), rgb(233, 168, 233));
+    align-items: center;
+}
+.btn{
+    background-color: rgb(147, 13, 147);
+    color: aliceblue;
+    font-weight: 600;
+}
+.card-body{
+    background: linear-gradient(rgb(101, 199, 244), rgb(211, 186, 96));
+    border-radius: 3px;
+    
+}
