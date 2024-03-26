@@ -14,18 +14,18 @@
           </div>
           <div class="col-lg-6  col-sm-12">
             <div class="container ">
-                <h1 class="text-center my-4">Weather Reader</h1>
+                <h3 class="text-center my-2  h1tag">Weather</h3>
                 <div class=" " style="width: 100%;">
                     <div class="card-body  glass">
-                        <h5 class=" text-center">City Name</h5>
-                        <p class="card-text text-center">Temperature: <span id="temperature">20°C</span></p>
-                        <p class="card-text text-center">Humidity: <span id="humidity">50%</span></p>
-                        <p class="card-text text-center">Wind Speed: <span id="wind-speed">5 km/h</span></p>
-                        <p class="card-text text-center">Clear Skies</p>
-                        <p class="card-text text-center">☀️</p>
+                        <h3 class=" text-center " id="name-h-tag">City Name</h3>
+                        <p class="card-text text-center color-tag" id="temperature">20°C</p>
+                        <p class="card-text text-center color-tag">Humidity: <span id="humidity">50%</span></p>
+                        <p class="card-text text-center color-tag">Wind Speed: <span id="wind-speed">5 km/h</span></p>
+                        <p class="card-text text-center color-tag">Clear Skies</p>
+                        <p class="card-text text-center icon-emoji">☀️</p>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control " style="width: 100px;"  placeholder="country/city" aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-info   "  type="button" id="button-addon2">Search</button>
+                            <input type="text" id="text-box" class="form-control " style="width: 100px;"  placeholder="country/city" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-info   " onclick="searchButton()" type="button" id="button-addon2">Search</button>
                         </div>
                     </div>
                 </div>
@@ -37,6 +37,8 @@
         </div>
       </div>
     
+   <script src="./app.js">
     
+   </script> 
 </body>
 </html>
