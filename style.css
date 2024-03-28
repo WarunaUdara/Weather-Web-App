@@ -17,16 +17,16 @@
     /* background: linear-gradient(rgb(101, 199, 244), rgb(211, 
     186, 96));
     */
-    background: linear-gradient(rgba(101, 199, 244, 0.334), rgba(247, 203, 107, 0.5));
-    border-radius: 3px;
+    background: linear-gradient(rgba(0, 36, 54, 0.736), rgba(134, 91, 0, 0.32));
+    border-radius: 19px;
     box-shadow: 0 8px 32px 0 rgba(0, 102, 255, 0.37);
     backdrop-filter: blur(4px);
     border: 1px solid rgba(255,255,255,0.3);
     
+    
+    
 }
-.text-field1{
-    max-width: 100px;
-}
+
 .h1tag{
     color: aliceblue;
 }
@@ -48,8 +48,4 @@
 }
 #name-h-tag{
     color: aliceblue;
-}
-.icon-emoji{
-    font-size: 5rem;
-    
 }

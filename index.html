@@ -18,13 +18,13 @@
                 <h3 class="text-center my-2  h1tag">Weather</h3>
                 <div class=" " style="width: 100%;">
                     <div class="card-body  glass">
-                        <h3 class=" text-center " id="name-h-tag">City Name</h3>
+                        <h3 class=" text-center " id="name-h-tag"></h3>
                         <p class="card-text text-center color-tag" id="temperature"></p>
-                        <p class="card-text text-center color-tag">Humidity: <span id="humidity"></span></p>
-                        <p class="card-text text-center color-tag">Wind Speed: <span id="wind-speed"></span></p>
+                        <p class="card-text text-center color-tag"><span id="humidity"></span></p>
+                        <p class="card-text text-center color-tag"><span id="wind-speed"></span></p>
                         <p class="card-text text-center color-tag" id="condition-text"></p>
-                        <p class="card-text text-center icon-emoji">☀️</p>
-                        <div class="input-group mb-3">
+                        <p class="card-text text-center icon-emoji" id="icon"></p>
+                        <div class="input-group mb-4   ">
                             <input type="text" id="text-box" class="form-control " style="width: 100px;"  placeholder="country/city" aria-label="Recipient's username" aria-describedby="button-addon2">
                             <button class="btn btn-outline-info   " onclick="searchButton()" type="button" id="button-addon2">Search</button>
                         </div>

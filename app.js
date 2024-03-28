@@ -27,13 +27,16 @@ function getDataFromAPI(){
             var windSpeed=data.current.wind_kph;
             var condition=data.current.condition.text;
 
+            
+            
+
             document.getElementById("condition-text").innerHTML=condition;
             console.log(condition);
             
-            document.getElementById("wind-speed").innerHTML=windSpeed+" km/h";
+            document.getElementById("wind-speed").innerHTML="Wind Speed: "+windSpeed+" km/h";
             console.log(windSpeed);
 
-            document.getElementById("humidity").innerHTML=humidity+"%";
+            document.getElementById("humidity").innerHTML="Humidity: "+humidity+"%";
             console.log(humidity);
             
             document.getElementById("temperature").innerHTML = temp_C + "°C";
@@ -41,6 +44,13 @@ function getDataFromAPI(){
             
             document.getElementById("name-h-tag").innerHTML = countryName+" - "+locationName;
             console.log(countryName+"  "+locationName);
+
+            var img = document.createElement('img');
+            img.src = data.current.condition.icon;
+            img.style.width = '100px';  
+            img.style.height = '100px'; 
+            document.getElementById("icon").innerHTML="";
+            document.getElementById("icon").appendChild(img);
             
 
 
@@ -61,3 +71,5 @@ fetch("http://api.weatherapi.com/v1/current.json?key=4c56104522d74b8c98022054224
 //data.location.name
 //data.location.region
 //data.location.country
+
+
