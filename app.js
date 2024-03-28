@@ -17,7 +17,7 @@ function searchButton() {
 }
 
 function getDataFromAPI(){
-        fetch("http://api.weatherapi.com/v1/current.json?key=4c56104522d74b8c980220542242603&q="+result)
+        fetch("https://api.weatherapi.com/v1/current.json?key=4c56104522d74b8c980220542242603&q="+result)
         .then(response => response.json())
         .then(data => {
             var temp_C = data.current.temp_c;
