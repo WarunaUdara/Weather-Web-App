@@ -3,7 +3,7 @@
     background: linear-gradient(to right, rgb(128, 0, 128), rgb(172, 86, 233), rgb(233, 168, 233));
     align-items: center;
     background-image: url(./images/back.png);
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
     width: 100%;
     height: auto;
