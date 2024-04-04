@@ -52,13 +52,13 @@ function getDataFromAPI() {
       img.src = data.current.condition.icon;
       img.style.width = "60px";
       img.style.height = "60px";
-      //document.getElementById("icon").innerHTML = "";
-      // document.getElementById("icon").appendChild(img);
 
       console.log(temp_C);
 
-      var span1 = document.createElement("span");
+      // Clear the contents of the temperature element
+      document.getElementById("temperature").innerHTML = "";
 
+      var span1 = document.createElement("span");
       span1.innerHTML = temp_C + "°C";
       span1.style.fontSize = "3.5rem";
       span1.style.fontWeight = "bold";
@@ -70,56 +70,69 @@ function getDataFromAPI() {
       img.style.paddingBottom = "0px";
       img.style.border = "0px";
 
-
       var div = document.getElementById("temperature"); // Replace with your div id
       div.appendChild(img);
 
       // Clear the contents of the elements
       document.getElementById("days").innerHTML = "";
       document.getElementById("upcoming-condition").innerHTML = "";
-
-
-
-      // for (var i = 0; i < 5; i++) {
-      //   var img = document.createElement("img");
-      //   img.src = data.current.condition.icon;
-      //   img.style.margin = "5px"; // Add space around the image
-
-      //   var textConditon = document.createTextNode(condition);
-      //   var span = document.createElement("span");
-      //   span.style.fontSize = "12px";
-      //   span.style.margin = "3px";
-      //   span.appendChild(textConditon);
-
-      //   document.getElementById("days").appendChild(img);
-      //   document.getElementById("upcoming-condition").appendChild(span);
-      // }
     });
 }
 
 function logWeatherConditions(responseBody) {
   const forecastDays = responseBody.forecast.forecastday;
-  const upcomingConditionDiv = document.getElementById('upcoming-condition');
+  const upcomingConditionDiv = document.getElementById('day1');
 
-  forecastDays.forEach(day => {
+  // Clear the existing forecast data
+  upcomingConditionDiv.innerHTML = '';
+
+  forecastDays.forEach(days => {
+    console.log(days);
     const newDiv = document.createElement('div');
+    newDiv.classList.add('row', 'mb-3', 'glass-border'); // Add glass-border class for glassmorphism effect
 
+    const imgDiv = document.createElement('div');
+    imgDiv.classList.add('col-2', 'd-flex', 'align-items-center');
     const img = document.createElement("img");
-    img.src = day.day.condition.icon;
-    img.style.margin = "5px"; // Add space around the image
+    img.src = days.day.condition.icon;
+    img.style.width = "50px";
+    img.style.height = "50px";
+    img.style.marginBottom = "30px";
+    imgDiv.appendChild(img);
 
-    const textConditon = document.createTextNode(`Date: ${day.date}, Possible Temperature: ${day.day.avgtemp_c}°C`);
-    const span = document.createElement("span");
-    span.style.fontSize = "12px";
-    span.style.margin = "3px";
-    span.appendChild(textConditon);
+    const textDiv = document.createElement('div');
+    textDiv.classList.add('col', 'text-white');
 
-    newDiv.appendChild(img);
-    newDiv.appendChild(span);
+    // Format date and get the day of the week
+    const date = new Date(days.date);
+    const dayOfWeek = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(date);
+
+    // Create text nodes for each part with appropriate styling
+    const dayText = document.createTextNode(dayOfWeek);
+    const humidityText = document.createTextNode(`Humidity: ${days.day.avghumidity}%`);
+    const temperatureText = document.createTextNode(`${days.day.avgtemp_c}°C`);
+
+    // Add empty spaces between text nodes
+    const space = document.createTextNode('\u00A0\u00A0\u00A0'); // Add three non-breaking spaces
+
+    // Append the text nodes to the textDiv with spaces in between
+    textDiv.appendChild(dayText);
+    textDiv.appendChild(space);
+    
+    textDiv.appendChild(humidityText);
+    textDiv.appendChild(space.cloneNode(true)); // Clone the space node
+    textDiv.appendChild(temperatureText);
+
+    newDiv.appendChild(textDiv);
+    newDiv.appendChild(imgDiv);
 
     upcomingConditionDiv.appendChild(newDiv);
   });
 }
+
+
+
+
 
 
 

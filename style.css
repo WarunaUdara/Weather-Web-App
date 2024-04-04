@@ -79,3 +79,15 @@ background-image:  linear-gradient( rgb(18, 18, 18), rgb(75, 75, 75));
 #condition-text{
     font-size: 15px;
 }
+.glass-border {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    padding-top: 10px;
+  }
+  .container {
+    display:flexbox;
+    justify-content: center;
+    align-items: center;
+  }
+  
