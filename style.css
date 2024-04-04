@@ -23,7 +23,7 @@ height: 100%;
 background-image:  linear-gradient( rgb(18, 18, 18), rgb(75, 75, 75));
 }
 .btn{
-    background-color: rgb(147, 13, 147);
+    background-color: rgba(0, 183, 255, 0.771);
     color: aliceblue;
     font-weight: 600;
 }

@@ -89,15 +89,14 @@ function logWeatherConditions(responseBody) {
   forecastDays.forEach(days => {
     console.log(days);
     const newDiv = document.createElement('div');
-    newDiv.classList.add('row', 'mb-3', 'glass-border'); // Add glass-border class for glassmorphism effect
+    newDiv.classList.add('row', 'mb-3', 'glass-border', 'position-relative'); // Add position-relative class for relative positioning
 
     const imgDiv = document.createElement('div');
-    imgDiv.classList.add('col-2', 'd-flex', 'align-items-center');
+    imgDiv.classList.add('col-2', 'd-flex', 'align-items-center', 'justify-content-end'); // Align items to end
     const img = document.createElement("img");
     img.src = days.day.condition.icon;
     img.style.width = "50px";
     img.style.height = "50px";
-    img.style.marginBottom = "30px";
     imgDiv.appendChild(img);
 
     const textDiv = document.createElement('div');
@@ -108,27 +107,34 @@ function logWeatherConditions(responseBody) {
     const dayOfWeek = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(date);
 
     // Create text nodes for each part with appropriate styling
-    const dayText = document.createTextNode(dayOfWeek);
     const humidityText = document.createTextNode(`Humidity: ${days.day.avghumidity}%`);
-    const temperatureText = document.createTextNode(`${days.day.avgtemp_c}°C`);
+    const temperatureText = document.createTextNode(`Temperature: ${days.day.avgtemp_c}°C`);
 
     // Add empty spaces between text nodes
     const space = document.createTextNode('\u00A0\u00A0\u00A0'); // Add three non-breaking spaces
 
     // Append the text nodes to the textDiv with spaces in between
-    textDiv.appendChild(dayText);
-    textDiv.appendChild(space);
-    
     textDiv.appendChild(humidityText);
+    textDiv.appendChild(document.createElement('br')); // Add line break after humidity
     textDiv.appendChild(space.cloneNode(true)); // Clone the space node
     textDiv.appendChild(temperatureText);
 
     newDiv.appendChild(textDiv);
     newDiv.appendChild(imgDiv);
 
+    // Create a div for the day text and position it absolutely relative to the new div
+    const dayDiv = document.createElement('div');
+    dayDiv.textContent = dayOfWeek;
+    dayDiv.style.position = 'absolute';
+    dayDiv.style.top = '0';
+    dayDiv.style.left = '5px'; // Add 5px margin-left
+    dayDiv.style.color = 'rgb(0, 183, 255)'; // Set color to RGBA(0, 183, 255, 0.771)
+    newDiv.appendChild(dayDiv);
+
     upcomingConditionDiv.appendChild(newDiv);
   });
 }
+
 
 
 
