@@ -8,7 +8,8 @@ var result;
 
 function searchButton() {
   name1 = document.getElementById("text-box").value;
-  var cityName = name1;
+  var cityName = name1.trim();
+  console.log(cityName);
 
   result = replaceSpacesWithPercent20(cityName);
   console.log(result);
@@ -16,47 +17,113 @@ function searchButton() {
   getDataFromAPI();
 }
 
-function getDataFromAPI(){
-        fetch("https://api.weatherapi.com/v1/current.json?key=4c56104522d74b8c980220542242603&q="+result)
-        .then(response => response.json())
-        .then(data => {
-            var temp_C = data.current.temp_c;
-            var locationName = data.location.name;
-            var countryName = data.location.country;
-            var humidity=data.current.humidity;
-            var windSpeed=data.current.wind_kph;
-            var condition=data.current.condition.text;
+function getDataFromAPI() {
+  fetch(
+    "https://api.weatherapi.com/v1/forecast.json?key=4c56104522d74b8c980220542242603&q=" +
+      result+"&days=7"
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      logWeatherConditions(data);
+      var temp_C = data.current.temp_c;
+      var locationName = data.location.name;
+      var countryName = data.location.country;
+      var humidity = data.current.humidity;
+      var windSpeed = data.current.wind_kph;
+      var condition = data.current.condition.text;
 
-            
-            
+      document.getElementById("condition-text").innerHTML = condition;
+      console.log(condition);
 
-            document.getElementById("condition-text").innerHTML=condition;
-            console.log(condition);
-            
-            document.getElementById("wind-speed").innerHTML="Wind Speed: "+windSpeed+" km/h";
-            console.log(windSpeed);
+      document.getElementById("wind-speed").innerHTML =
+        windSpeed + " km/h" + "   Wind Speed";
+      console.log(windSpeed);
 
-            document.getElementById("humidity").innerHTML="Humidity: "+humidity+"%";
-            console.log(humidity);
-            
-            document.getElementById("temperature").innerHTML = temp_C + "°C";
-            console.log(temp_C);
-            
-            document.getElementById("name-h-tag").innerHTML = countryName+" - "+locationName;
-            console.log(countryName+"  "+locationName);
+      
+      document.getElementById("humidity").innerHTML =
+        humidity + "%" + "   Humidity";
+      console.log(humidity);
 
-            var img = document.createElement('img');
-            img.src = data.current.condition.icon;
-            img.style.width = '100px';  
-            img.style.height = '100px'; 
-            document.getElementById("icon").innerHTML="";
-            document.getElementById("icon").appendChild(img);
-            
+      document.getElementById("name-h-tag").innerHTML =
+        countryName + " - " + locationName;
+      console.log(countryName + "  " + locationName);
+
+      var img = document.createElement("img");
+      img.src = data.current.condition.icon;
+      img.style.width = "60px";
+      img.style.height = "60px";
+      //document.getElementById("icon").innerHTML = "";
+      // document.getElementById("icon").appendChild(img);
+
+      console.log(temp_C);
+
+      var span1 = document.createElement("span");
+
+      span1.innerHTML = temp_C + "°C";
+      span1.style.fontSize = "3.5rem";
+      span1.style.fontWeight = "bold";
+      document.getElementById("temperature").appendChild(span1);
+
+      var img = document.createElement("img");
+      img.src = data.current.condition.icon;
+      img.style.marginBottom = "0px";
+      img.style.paddingBottom = "0px";
+      img.style.border = "0px";
 
 
-        });
-    }
-    
+      var div = document.getElementById("temperature"); // Replace with your div id
+      div.appendChild(img);
+
+      // Clear the contents of the elements
+      document.getElementById("days").innerHTML = "";
+      document.getElementById("upcoming-condition").innerHTML = "";
+
+
+
+      // for (var i = 0; i < 5; i++) {
+      //   var img = document.createElement("img");
+      //   img.src = data.current.condition.icon;
+      //   img.style.margin = "5px"; // Add space around the image
+
+      //   var textConditon = document.createTextNode(condition);
+      //   var span = document.createElement("span");
+      //   span.style.fontSize = "12px";
+      //   span.style.margin = "3px";
+      //   span.appendChild(textConditon);
+
+      //   document.getElementById("days").appendChild(img);
+      //   document.getElementById("upcoming-condition").appendChild(span);
+      // }
+    });
+}
+
+function logWeatherConditions(responseBody) {
+  const forecastDays = responseBody.forecast.forecastday;
+  const upcomingConditionDiv = document.getElementById('upcoming-condition');
+
+  forecastDays.forEach(day => {
+    const newDiv = document.createElement('div');
+
+    const img = document.createElement("img");
+    img.src = day.day.condition.icon;
+    img.style.margin = "5px"; // Add space around the image
+
+    const textConditon = document.createTextNode(`Date: ${day.date}, Possible Temperature: ${day.day.avgtemp_c}°C`);
+    const span = document.createElement("span");
+    span.style.fontSize = "12px";
+    span.style.margin = "3px";
+    span.appendChild(textConditon);
+
+    newDiv.appendChild(img);
+    newDiv.appendChild(span);
+
+    upcomingConditionDiv.appendChild(newDiv);
+  });
+}
+
+
+
+
 
 function replaceSpacesWithPercent20(str) {
   return str.split(" ").join("%20");
@@ -64,40 +131,71 @@ function replaceSpacesWithPercent20(str) {
 
 function getCurrentPosition() {
   if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
   } else {
-      console.log("Geolocation is not supported by this browser.");
+    console.log("Geolocation is not supported by this browser.");
   }
 }
 
 function showPosition(position) {
   console.log("Latitude: " + position.coords.latitude);
   console.log("Longitude: " + position.coords.longitude);
+  getLocationName(position.coords.latitude, position.coords.longitude);
 }
 
 function showError(error) {
-  switch(error.code) {
-      case error.PERMISSION_DENIED:
-          console.log("User denied the request for Geolocation.");
-          break;
-      case error.POSITION_UNAVAILABLE:
-          console.log("Location information is unavailable.");
-          break;
-      case error.TIMEOUT:
-          console.log("The request to get user location timed out.");
-          break;
-      case error.UNKNOWN_ERROR:
-          console.log("An unknown error occurred.");
-          break;
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      console.log("User denied the request for Geolocation.");
+      getLocation();
+      break;
+    case error.POSITION_UNAVAILABLE:
+      console.log("Location information is unavailable.");
+      break;
+    case error.TIMEOUT:
+      console.log("The request to get user location timed out.");
+      break;
+    case error.UNKNOWN_ERROR:
+      console.log("An unknown error occurred.");
+      break;
   }
 }
 
+const getLocation = () => {
+  //get  location by ip
+  //this is not accurate but this can be implemented
+  fetch("https://ipapi.co/json/")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.country_name);
+      // name1 = data.country_name;
+      name1 = data.city;
 
+      var cityName = name1.trim();
 
+      result = replaceSpacesWithPercent20(cityName);
+      getDataFromAPI();
+    });
+};
+function getLocationName(latitude, longitude) {
+  fetch(
+    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude-${latitude}&longitude-${longitude}&localityLanguage-en`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.countryName);
+      // name1 = data.countryName;
+      name1 = data.city;
 
-fetch("http://api.weatherapi.com/v1/current.json?key=4c56104522d74b8c980220542242603&q=sri%20lanka")
-        .then(response => response.json())
-        .then(data =>console.log(data.location.lat) );
+      var cityName = name1.trim();
+      result = replaceSpacesWithPercent20(cityName);
+      getDataFromAPI();
+    });
+}
+
+// fetch("http://api.weatherapi.com/v1/current.json?key=4c56104522d74b8c980220542242603&q=sri%20lanka")
+//         .then(response => response.json())
+//         .then(data =>console.log(data.location) );
 
 //data.current.temp_c
 //data.current.temp_f
@@ -105,4 +203,33 @@ fetch("http://api.weatherapi.com/v1/current.json?key=4c56104522d74b8c98022054224
 //data.location.region
 //data.location.country
 
+/*      <div class="row">
+        <div class="col-lg-3 col-md-2 col-sm-1"></div>
+        
+        <div class="col-lg-6 col-md-8 col-sm-12">
+          <div class="container">
+            <div class="m-2" style="width: 100%">
+              <div class="card-body glass">
+                <h3 class="color-tag">7-day Forecast</h3>
+                <div id="day1">
+               
+                </div>
+                <div class="text-center " id="days">
 
+                </div>
+                <div class="text-center " id="upcoming-condition">
+
+                </div>
+                
+
+                
+                
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-2 col-sm-1"></div>
+      </div>
+    </div> this is my html code , what i want is adding data into a div , id is "days" i want to create 7 div div tags and  each div tag contains a day , image , and the temperature,  in a row, i want to add this from javascript,*/

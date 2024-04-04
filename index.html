@@ -1,97 +1,180 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Weather App</title>
     <!-- Link Bootstrap CSS -->
-    <meta name="viewport" content="width=device-widt, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body onload="getCurrentPosition();" class="body">
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-		xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
-		<defs>
-			<linearGradient id="bg">
-				<stop offset="0%" style="stop-color:rgba(130, 158, 249, 0.06)"></stop>
-				<stop offset="50%" style="stop-color:rgba(76, 190, 255, 0.6)"></stop>
-				<stop offset="100%" style="stop-color:rgba(115, 209, 72, 0.2)"></stop>
-			</linearGradient>
-			<path id="wave" fill="url(#bg)" d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
-	s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z" />
-		</defs>
-		<g>
-			<use xlink:href='#wave' opacity=".3">
-				<animateTransform
-          attributeName="transform"
-          attributeType="XML"
-          type="translate"
-          dur="10s"
-          calcMode="spline"
-          values="270 230; -334 180; 270 230"
-          keyTimes="0; .5; 1"
-          keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
-          repeatCount="indefinite" />
-			</use>
-			<use xlink:href='#wave' opacity=".6">
-				<animateTransform
-          attributeName="transform"
-          attributeType="XML"
-          type="translate"
-          dur="8s"
-          calcMode="spline"
-          values="-270 230;243 220;-270 230"
-          keyTimes="0; .6; 1"
-          keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
-          repeatCount="indefinite" />
-			</use>
-			<use xlink:href='#wave' opacty=".9">
-				<animateTransform
-          attributeName="transform"
-          attributeType="XML"
-          type="translate"
-          dur="6s"
-          calcMode="spline"
-          values="0 230;-140 200;0 230"
-          keyTimes="0; .4; 1"
-          keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
-          repeatCount="indefinite" />
-			</use>
-		</g>
-	</svg>
+    <meta name="viewport" content="width=device-widt, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body onload="getCurrentPosition();" class="body">
+    <svg
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      x="0px"
+      y="0px"
+      width="100%"
+      height="100%"
+      viewBox="0 0 1600 900"
+      preserveAspectRatio="xMidYMax slice"
+    >
+      <defs>
+        <linearGradient id="bg">
+          <stop
+            offset="0%"
+            style="stop-color: rgba(130, 158, 249, 0.06)"
+          ></stop>
+          <stop offset="50%" style="stop-color: rgba(76, 190, 255, 0.6)"></stop>
+          <stop
+            offset="100%"
+            style="stop-color: rgba(115, 209, 72, 0.2)"
+          ></stop>
+        </linearGradient>
+        <path
+          id="wave"
+          fill="url(#bg)"
+          d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
+	s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z"
+        />
+      </defs>
+      <g>
+        <use xlink:href="#wave" opacity=".3">
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="translate"
+            dur="10s"
+            calcMode="spline"
+            values="270 230; -334 180; 270 230"
+            keyTimes="0; .5; 1"
+            keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+            repeatCount="indefinite"
+          />
+        </use>
+        <use xlink:href="#wave" opacity=".6">
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="translate"
+            dur="8s"
+            calcMode="spline"
+            values="-270 230;243 220;-270 230"
+            keyTimes="0; .6; 1"
+            keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+            repeatCount="indefinite"
+          />
+        </use>
+        <use xlink:href="#wave" opacty=".9">
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="translate"
+            dur="6s"
+            calcMode="spline"
+            values="0 230;-140 200;0 230"
+            keyTimes="0; .4; 1"
+            keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+            repeatCount="indefinite"
+          />
+        </use>
+      </g>
+    </svg>
     <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-md-2 col-sm-1">
-            
-          </div>
-          <div class="col-lg-6 col-md-8 col-sm-12">
-            <div class="container ">
-                <h3 class="text-center my-2  h1tag">Weather</h3>
-                <div class=" " style="width: 100%;">
-                    <div class="card-body  glass">
-                        <h3 class=" text-center " id="name-h-tag"></h3>
-                        <p class="card-text text-center color-tag" id="temperature"></p>
-                        <p class="card-text text-center color-tag"><span id="humidity"></span></p>
-                        <p class="card-text text-center color-tag"><span id="wind-speed"></span></p>
-                        <p class="card-text text-center color-tag" id="condition-text"></p>
-                        <p class="card-text text-center icon-emoji" id="icon"></p>
-                        <div class="input-group mb-4   ">
-                            <input type="text" id="text-box" class="form-control " style="width: 100px;"  placeholder="country/city" aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-info   " onclick="searchButton()" type="button" id="button-addon2">Search</button>
-                        </div>
-                    </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-2 col-sm-1"></div>
+        <div class="col-lg-6 col-md-8 col-sm-12">
+          <div class="container">
+            <div class="m-2" style="width: 100%">
+              <div class="card-body glass">
+                <h3 class="text-center" id="name-h-tag"></h3>
+
+                <!-- <div class="card-text text-lg-start icon-emoji" id="icon"></div> -->
+                <div>
+                  <div class="input-group mb-4">
+                    <input
+                      type="text"
+                      id="text-box"
+                      class="form-control"
+                      style="width: 100px"
+                      placeholder="country/city"
+                      aria-label="text-Box"
+                      aria-describedby="button-addon2"
+                    />
+                    <button
+                      class="btn btn-outline-info"
+                      onclick="searchButton()"
+                      type="button"
+                      id="button-addon2"
+                    >
+                      Search
+                    </button>
+                  </div>
+                  <div
+                    class="card-text text-sm-start text-lg-center color-tag"
+                    id="temperature"
+                  ></div>
+
+                  <div class="card-text text-sm-start text-lg-center color-tag">
+                    <sup id="condition-text"></sup>
+                  </div>
                 </div>
+
+                <p class="card-text text-sm-start  text-lg-start  color-tag">
+                  <span id="humidity"></span>
+                </p>
+                <p class="card-text text-sm-start text-lg-start color-tag">
+                  <span id="wind-speed"></span>
+                </p>
+                <!-- <p
+                  class="card-text text-lg-start color-tag"
+                  id="condition-text"
+                ></p> -->
+
+                
+              </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-2 col-sm-1">
-            
-          </div>
         </div>
+        <div class="col-lg-3 col-md-2 col-sm-1"></div>
       </div>
 
       
-    
-   <script src="./app.js">
-    
-   </script> 
-</body>
+      <div class="row">
+        <div class="col-lg-3 col-md-2 col-sm-1"></div>
+        
+        <div class="col-lg-6 col-md-8 col-sm-12">
+          <div class="container">
+            <div class="m-2" style="width: 100%">
+              <div class="card-body glass">
+                
+                <div id="day1">
+                  <h3 class="color-tag">7-day Forecast</h3>
+                </div>
+                <div class="text-center " id="days">
+
+                </div>
+                <div class="text-center " id="upcoming-condition">
+
+                </div>
+                
+
+                
+                
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-2 col-sm-1"></div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
 </html>
