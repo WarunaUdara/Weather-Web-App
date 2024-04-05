@@ -128,7 +128,7 @@ function logWeatherConditions(responseBody) {
     dayDiv.style.position = 'absolute';
     dayDiv.style.top = '0';
     dayDiv.style.left = '5px'; // Add 5px margin-left
-    dayDiv.style.color = 'rgb(0, 183, 255)'; // Set color to RGBA(0, 183, 255, 0.771)
+    dayDiv.style.color = 'rgba(70, 202, 255, 0.841)'; // Set color to RGBA(0, 183, 255, 0.771)
     newDiv.appendChild(dayDiv);
 
     upcomingConditionDiv.appendChild(newDiv);
@@ -212,43 +212,3 @@ function getLocationName(latitude, longitude) {
     });
 }
 
-// fetch("http://api.weatherapi.com/v1/current.json?key=4c56104522d74b8c980220542242603&q=sri%20lanka")
-//         .then(response => response.json())
-//         .then(data =>console.log(data.location) );
-
-//data.current.temp_c
-//data.current.temp_f
-//data.location.name
-//data.location.region
-//data.location.country
-
-/*      <div class="row">
-        <div class="col-lg-3 col-md-2 col-sm-1"></div>
-        
-        <div class="col-lg-6 col-md-8 col-sm-12">
-          <div class="container">
-            <div class="m-2" style="width: 100%">
-              <div class="card-body glass">
-                <h3 class="color-tag">7-day Forecast</h3>
-                <div id="day1">
-               
-                </div>
-                <div class="text-center " id="days">
-
-                </div>
-                <div class="text-center " id="upcoming-condition">
-
-                </div>
-                
-
-                
-                
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-2 col-sm-1"></div>
-      </div>
-    </div> this is my html code , what i want is adding data into a div , id is "days" i want to create 7 div div tags and  each div tag contains a day , image , and the temperature,  in a row, i want to add this from javascript,*/
