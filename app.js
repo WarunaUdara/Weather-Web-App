@@ -1,6 +1,8 @@
 //weather App by Waruna Udara Sampath
 
 let name1 = document.getElementById("text-box").value;
+
+// demo api keys, keys already externalized to a .env file, as one of very first projects of mine, i made this mistake as a learner.
 const apiKeyOpenWeather = "043c555d770214a59491f1082279d245";
 const apiKeyFreeWeather = "a32318c3d97b42b7a60170105241711";
 
